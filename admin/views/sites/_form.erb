@@ -1,12 +1,12 @@
 <div class="group">
   <%= f.label :url %><%= f.error_message_on :url %>
   <%= f.text_field :url, :class => :text_field %>
-  <span class="description">Ex: a simple text</span>
+  <span class="description">Fully and properly qualified URL.</span>
 </div>
 <div class="group">
   <%= f.label :interval %><%= f.error_message_on :interval %>
-  <%= f.text_field :interval, :class => :text_field %>
-  <span class="description">Ex: a simple text</span>
+  <%= f.text_field :interval, :class => :text_field, :value => '900' %>
+  <span class="description">How many seconds between pings?</span>
 </div>
 
 <div class="group navform wat-cf">
