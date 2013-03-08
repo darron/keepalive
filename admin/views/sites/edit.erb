@@ -1,0 +1,18 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to pat(:list), url(:sites, :index) %></li>
+      <li><%= link_to pat(:new), url(:sites, :new) %></li>
+      <li class="active"><%= link_to pat(:edit), url(:sites, :edit, :id => @sites.id) %></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= pat(:edit) %> <% mt(:sites) %></h2>
+    <div class="inner">
+      <% form_for :sites, url(:sites, :update, :id => @sites.id), :method => :put, :class => :form do |f| %>
+        <%= partial "sites/form", :locals => { :f => f } %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, partial("base/sidebar") %>

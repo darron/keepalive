@@ -1,0 +1,40 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to pat(:list), url(:sites, :index) %></li>
+      <li><%= link_to pat(:new), url(:sites, :new) %></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= pat(:all) %> <% mt(:sites) %></h2>
+    <div class="inner">
+      <table class="table">
+        <tr>
+          <th class="first"><%= mat(:sites, :id) %></th>
+          <th><%= mat(:sites, :url) %></th>
+          <th><%= mat(:sites, :interval) %></th>
+          <th><%= mat(:sites, :created_at) %></th>
+          <th><%= mat(:sites, :updated_at) %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @sites.each do |sites| %>
+        <tr>
+          <td class="first"><%= sites.id %></td>
+          <td><%= sites.url %></td>
+          <td><%= sites.interval %></td>
+          <td><%= time_ago_in_words(sites.created_at) %></td>
+          <td><%= time_ago_in_words(sites.updated_at) %></td>
+          <td class="last">
+            <%= button_to pat(:edit), url(:sites, :edit, :id => sites.id), :method => :get, :class => :button_to %> |
+            <%= button_to pat(:delete), url(:sites, :destroy, :id => sites.id), :method => :delete, :class => :button_to, :onsubmit => "return confirm('#{pat(:confirm)}')" %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, partial("base/sidebar") %>

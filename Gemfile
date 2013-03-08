@@ -20,6 +20,7 @@ gem 'dm-timestamps'
 gem 'dm-migrations'
 gem 'dm-constraints'
 gem 'dm-aggregates'
+gem 'dm-timestamps'
 gem 'dm-core'
 
 gem 'therubyracer'
