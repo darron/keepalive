@@ -22,6 +22,8 @@ GEM
       multi_json (~> 1.3)
       multipart-post (~> 1.1)
       rubyzip (~> 0.9)
+    clockwork (0.5.0)
+      tzinfo (~> 0.3.35)
     clouseau (0.0.2)
       rubyzip (~> 0.9.9)
     commonjs (0.2.6)
@@ -68,6 +70,9 @@ GEM
     http_router (0.10.2)
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
+    httparty (0.10.2)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.4)
     interact (0.5.2)
     json (1.6.8)
@@ -85,6 +90,7 @@ GEM
     mime-types (1.21)
     mothership (0.3.5)
     multi_json (1.4.0)
+    multi_xml (0.5.3)
     multipart-post (1.2.0)
     padrino (0.10.7)
       padrino-admin (= 0.10.7)
@@ -159,6 +165,7 @@ GEM
       cfoundry (~> 0.4.0)
       rest-client (~> 1.6)
       uuidtools (~> 2.1)
+    tzinfo (0.3.36)
     unicorn (4.6.2)
       kgio (~> 2.6)
       rack
@@ -182,6 +189,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   caldecott
+  clockwork
   dm-aggregates
   dm-constraints
   dm-core
@@ -193,6 +201,7 @@ DEPENDENCIES
   do_postgres
   erubis (~> 2.7.0)
   foreman
+  httparty
   json
   less
   padrino (= 0.10.7)

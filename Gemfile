@@ -29,6 +29,10 @@ gem 'foreman'
 
 gem 'json'
 
+gem 'httparty'
+
+gem 'clockwork'
+
 group :development do
   gem 'dm-sqlite-adapter'
   gem 'tunnel-vmc-plugin'
