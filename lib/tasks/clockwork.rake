@@ -5,7 +5,8 @@ task :clockwork => :environment do
 
   Sites.all.each do |site|
     Clockwork.every site.interval, site.url do
-      response = HTTParty.get(site.url)
+      http = HTTParty.get(site.url)
+      logger.info "#{site.url}: #{http.response.code}"
     end
   end
 
