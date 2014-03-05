@@ -1,8 +1,10 @@
 ---
-:orm: datamapper
+:orm: activerecord
 :test: rspec
 :mock: none
 :script: jquery
 :renderer: erb
-:stylesheet: less
+:stylesheet: scss
+:namespace: Keepalive
+:migration_format: number
 :admin_renderer: erb

@@ -1,63 +1,44 @@
-source "https://rubygems.org/"
+source 'https://rubygems.org'
+ruby '2.0.0'
+
+# Distribute your app as a gem
+# gemspec
 
 # Server requirements
 # gem 'thin' # or mongrel
+# gem 'trinidad', :platform => 'jruby'
 gem 'unicorn'
 
-# gem 'trinidad', :platform => 'jruby'
+# Optional JSON codec (faster performance)
+# gem 'oj'
 
 # Project requirements
 gem 'rake'
-gem 'sinatra-flash', :require => 'sinatra/flash'
 
 # Component requirements
-gem 'bcrypt-ruby', :require => "bcrypt"
-gem 'rack-less'
-gem 'less'
-gem 'erubis', "~> 2.7.0"
-gem 'dm-validations'
-gem 'dm-timestamps'
-gem 'dm-migrations'
-gem 'dm-constraints'
-gem 'dm-aggregates'
-gem 'dm-timestamps'
-gem 'dm-core'
+gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'sass'
+gem 'erubis', '~> 2.7.0'
+gem 'activerecord', '>= 3.1', :require => 'active_record'
+gem 'pg'
 
-gem 'therubyracer'
+# Test requirements
+gem 'rspec', :group => 'test'
+gem 'rack-test', :require => 'rack/test', :group => 'test'
 
-gem 'foreman'
-
-gem 'json'
+# Padrino Stable Gem
+gem 'padrino', '0.12.0'
 
 gem 'httparty'
 
 gem 'clockwork'
 
-group :development do
-  gem 'dm-sqlite-adapter'
-  gem 'tunnel-vmc-plugin'
-  gem 'vmc', "~> 0.4.7"
-  gem 'caldecott'
-end
-
-group :production do
- gem 'pg'
- gem 'do_postgres'
- gem 'dm-postgres-adapter'
-end
-
-# Test requirements
-gem 'rspec'
-gem 'rack-test'
-
-# Padrino Stable Gem
-gem 'padrino', '0.10.7'
+gem 'foreman'
 
 # Or Padrino Edge
-# gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
+# gem 'padrino', :github => 'padrino/padrino-framework'
 
 # Or Individual Gems
 # %w(core gen helpers cache mailer admin).each do |g|
-#   gem 'padrino-' + g, '0.10.7'
+#   gem 'padrino-' + g, '0.12.0'
 # end
-  

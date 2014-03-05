@@ -1,16 +1,16 @@
-migration 1, :create_accounts do
-  up do
-    create_table :accounts do
-      column :id, Integer, :serial => true
-      column :name, String, :length => 255
-      column :surname, String, :length => 255
-      column :email, String, :length => 255
-      column :crypted_password, String, :length => 255
-      column :role, String, :length => 255
+class CreateAccounts < ActiveRecord::Migration
+  def self.up
+    create_table :accounts do |t|
+      t.string :name
+      t.string :surname
+      t.string :email
+      t.string :crypted_password
+      t.string :role
+      t.timestamps
     end
   end
 
-  down do
+  def self.down
     drop_table :accounts
   end
 end

@@ -1,41 +1,74 @@
+postgres = URI.parse(ENV['DATABASE_URL'] || '')
+
 ##
-# A MySQL connection:
-# DataMapper.setup(:default, 'mysql://user:password@localhost/the_database_name')
+# You can use other adapters like:
 #
-# # A Postgres connection:
-# DataMapper.setup(:default, 'postgres://user:password@localhost/the_database_name')
+#   ActiveRecord::Base.configurations[:development] = {
+#     :adapter   => 'mysql2',
+#     :encoding  => 'utf8',
+#     :reconnect => true,
+#     :database  => 'your_database',
+#     :pool      => 5,
+#     :username  => 'root',
+#     :password  => '',
+#     :host      => 'localhost',
+#     :socket    => '/tmp/mysql.sock'
+#   }
 #
-# # A Sqlite3 connection
-# DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "development.db"))
-#
+ActiveRecord::Base.configurations[:development] = {
+  :adapter   => 'postgresql',
+  :database  => 'keepalive_development',
+  :username  => 'darron',
+  :password  => '',
+  :host      => 'localhost',
+  :port      => 5432
 
-DataMapper.logger = logger
-DataMapper::Property::String.length(255)
+}
 
-# Migrations and seeding.
-#
-# `bundle exec vmc tunnel` into the Posgresql CF instance.
-# 
-# Edit the below manual database connection string. Once you've done that:
-#
-# `PADRINO_ENV=production rake dm:migrate`
-# `PADRINO_ENV=production rake seed`
-#
-# While being connected to the remote database.
-#
-# postgres_connection = "postgres://username:password@127.0.0.1:port/name" 
+ActiveRecord::Base.configurations[:production] = {
+  :adapter   => 'postgresql',
+  :database  => postgres.path[1..-1],
+  :username  => postgres.user,
+  :password  => postgres.password,
+  :host      => postgres.host,
+  :port      => 5432
 
-if ENV['VCAP_SERVICES'].nil? # Not on Cloudfoundry - probably on Heroku.
-	postgres_connection = ENV["DATABASE_URL"]
-else
-	services = JSON.parse(ENV['VCAP_SERVICES'])
-	postgresql_key = services.keys.select { |svc| svc =~ /postgresql/i }.first
-	postgresql = services[postgresql_key].first['credentials']
-	postgres_connection = "postgres://#{postgresql['user']}:#{postgresql['password']}@#{postgresql['hostname']}:#{postgresql['port']}/#{postgresql['name']}" 	
+}
+
+ActiveRecord::Base.configurations[:test] = {
+  :adapter   => 'postgresql',
+  :database  => 'keepalive_test',
+  :username  => 'root',
+  :password  => '',
+  :host      => 'localhost',
+  :port      => 5432
+
+}
+
+# Setup our logger
+ActiveRecord::Base.logger = logger
+
+if ActiveRecord::VERSION::MAJOR.to_i < 4
+  # Raise exception on mass assignment protection for Active Record models.
+  ActiveRecord::Base.mass_assignment_sanitizer = :strict
+
+  # Log the query plan for queries taking more than this (works
+  # with SQLite, MySQL, and PostgreSQL).
+  ActiveRecord::Base.auto_explain_threshold_in_seconds = 0.5
 end
 
-case Padrino.env
-  	when :development then DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "development.db"))
-  	when :production  then DataMapper.setup(:default, postgres_connection)
-  	when :test        then DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "test.db"))
-end
+# Doesn't include Active Record class name as root for JSON serialized output.
+ActiveRecord::Base.include_root_in_json = false
+
+# Store the full class name (including module namespace) in STI type column.
+ActiveRecord::Base.store_full_sti_class = true
+
+# Use ISO 8601 format for JSON serialized times and dates.
+ActiveSupport.use_standard_json_time_format = true
+
+# Don't escape HTML entities in JSON, leave that for the #json_escape helper
+# if you're including raw JSON in an HTML page.
+ActiveSupport.escape_html_entities_in_json = false
+
+# Now we can establish connection with our db.
+ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[Padrino.env])
