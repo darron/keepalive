@@ -39,6 +39,7 @@
                 <th class=header> <%= mat(:site, :id) %></th>
                 <th class=header> <%= mat(:site, :url) %></th>
                 <th class=header> <%= mat(:site, :interval) %></th>
+                <th class=header> <%= mat(:site, :ping_at) %></th>
                 <th class=header> <%= mat(:site, :created_at) %></th>
                 <th class=header> <%= mat(:site, :updated_at) %></th>
                 <th class="header list-row-action-header"></th>
@@ -53,6 +54,7 @@
           <td class=list-column> <%= site.id %> </td>
           <td class=list-column> <%= site.url %> </td>
           <td class=list-column> <%= site.interval %> </td>
+          <td class=list-column> <%= site.ping_at %> </td>
           <td class=list-column> <%= time_ago_in_words site.created_at %></td>
           <td class=list-column> <%= time_ago_in_words site.updated_at %></td>
           <td class="list-column list-row-action">
